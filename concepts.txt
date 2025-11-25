@@ -1,0 +1,43 @@
+
+spring.jpa.hibernate.ddl-auto?
+This is a Spring Boot property that controls how Hibernate (the JPA implementation) manages
+database schema creation and updates automatically. It's particularly useful during development
+
+spring.jpa.hibernate.ddl-auto=none
+Behavior: No schema creation or modification
+Use Case: Production environments
+Description: Hibernate won't make any changes to the database schema.
+You're responsible for managing the schema manually or through migration tools.
+
+spring.jpa.hibernate.ddl-auto=validate
+Behavior: Validates existing schema against entities
+Use Case: Production environments
+Description:
+Compares your entity mappings with the existing database schema
+Throws an exception if there are mismatches
+Doesn't create or modify tables
+
+spring.jpa.hibernate.ddl-auto=update
+Behavior: Updates schema to match entities
+Use Case: Development environments
+Description:
+Adds new tables and columns
+Won't delete existing columns or tables
+Can lead to schema drift over time
+Warning: Not recommended for production
+
+spring.jpa.hibernate.ddl-auto=create
+Behavior: Drops and recreates schema
+Use Case: Development/Testing
+Description:
+Drops all existing tables
+Creates new tables based on entities
+Data loss: All existing data is deleted
+
+spring.jpa.hibernate.ddl-auto=create-drop
+Behavior: Creates schema on startup, drops on shutdown
+Use Case: Testing environments
+Description:
+Creates schema when SessionFactory starts
+Drops schema when SessionFactory closes
+Perfect for integration tests
